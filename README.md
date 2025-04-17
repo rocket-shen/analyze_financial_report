@@ -1,2 +1,2 @@
 # analyze_financial_report
-analyze A_stock_by_financial_report
+依据A股上市公司行业分类，对财务报表["报告期", "ROE","净利率", "毛利率", "营收增长率", "净利润增长率", "资产负债率"]数据进行比对
