@@ -122,3 +122,5 @@ with pd.ExcelWriter(file_path, engine='openpyxl') as writer:
     cash_data.to_excel(writer, sheet_name='cash_flow', index=False)
     bonus_data.to_excel(writer, sheet_name='bonus', index=False)
     holders_data.to_excel(writer, sheet_name="holders", index=False)
+
+print(f"{symbol}_{stock_name}财务报表已保存到：{folder_path}文件夹中")
