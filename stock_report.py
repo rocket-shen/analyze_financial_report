@@ -11,7 +11,7 @@ folder_path = 'D:/雪球数据/个股财务报表'
 if not os.path.exists(folder_path):
     os.makedirs(folder_path)
 
-stock_dict = np.load(r'index\stock_dict.npy', allow_pickle=True).tolist()
+stock_dict = np.load(r'index/stock_dict.npy', allow_pickle=True).tolist()
 stock_name = stock_dict[symbol]
 print(stock_name)
 
@@ -86,7 +86,7 @@ def fetch_holders(data_url):
     df = pd.DataFrame(data_list)
     return df
 
-with open("index\financial.json", "r", encoding="utf-8") as f:
+with open(r"index/financial.json", "r", encoding="utf-8") as f:
     data_map = json.load(f)
 # 选择 "资产负债表" 这个字典
 balance_map = data_map.get("balance1", {})
