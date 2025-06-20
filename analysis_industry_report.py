@@ -39,7 +39,7 @@ def analysis_data(f):
     result.columns = result.columns.strftime('%Y/%m/%d')  # 转换回字符串格式
     return result
 
-directory = r"D:\雪球数据\行业财务报表"  # 注意：路径中的反斜杠需要转义，或者使用原始字符串（前面加r）
+directory = r"D:/雪球数据/行业财务报表"  # 注意：路径中的反斜杠需要转义，或者使用原始字符串（前面加r）
 
 def list_industry(d):
     industries = [name for name in os.listdir(d) if os.path.isdir(os.path.join(d, name))]
