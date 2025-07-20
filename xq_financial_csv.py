@@ -43,6 +43,9 @@ def fetch_financial_data(symbol_list, folder_path):
         stock_name = stock_dict.get(symbol, "未知证券名称")
         print(f'正在处理：{symbol} - {stock_name}')
 
+        folder = os.path.join(folder_path, f'{symbol}_{stock_name}')
+        os.mkdir(folder)
+
         params1 = {'symbol': symbol, 'type': 'all', 'is_detail': 'true', 'count': 30,
                    'timestamp': int(round(time.time() * 1000))}
         params2 = {'symbol': symbol, 'size': '20', 'page': '1', 'extend': 'true'}
@@ -51,32 +54,32 @@ def fetch_financial_data(symbol_list, folder_path):
             balance = fetch_data(url_balance, cookies, params1)
             balance.rename(columns=balance_map, inplace=True)
             balance_data = balance.reindex(columns=balance_map.values())
-            balance_data.to_csv(os.path.join(folder_path, f'{symbol}_{stock_name}_资产负债表.csv'), index=False)
-            print(f"{symbol}_{stock_name}_资产负债表已保存到：{folder_path}文件夹中")
+            balance_data.to_csv(os.path.join(folder, f'{symbol}_{stock_name}_资产负债表.csv'), index=False)
+            print(f"{symbol}_{stock_name}_资产负债表已保存到：{folder}文件夹中")
 
             income = fetch_data(url_income, cookies, params1)
             income.rename(columns=income_map, inplace=True)
             income_data = income.reindex(columns=income_map.values())
-            income_data.to_csv(os.path.join(folder_path, f'{symbol}_{stock_name}_利润表.csv'), index=False)
-            print(f"{symbol}_{stock_name}_利润表已保存到：{folder_path}文件夹中")
+            income_data.to_csv(os.path.join(folder, f'{symbol}_{stock_name}_利润表.csv'), index=False)
+            print(f"{symbol}_{stock_name}_利润表已保存到：{folder}文件夹中")
 
             cash = fetch_data(url_cash, cookies, params1)
             cash.rename(columns=cash_map, inplace=True)
             cash_data = cash.reindex(columns=cash_map.values())
-            cash_data.to_csv(os.path.join(folder_path, f'{symbol}_{stock_name}_现金流量表.csv'), index=False)
-            print(f"{symbol}_{stock_name}_现金流量表已保存到：{folder_path}文件夹中")
+            cash_data.to_csv(os.path.join(folder, f'{symbol}_{stock_name}_现金流量表.csv'), index=False)
+            print(f"{symbol}_{stock_name}_现金流量表已保存到：{folder}文件夹中")
 
             bonus = fetch_bonus(url_bonus, cookies, params2)
             bonus.rename(columns=bonus_map, inplace=True)
             bonus_data = bonus.reindex(columns=bonus_map.values())
-            bonus_data.to_csv(os.path.join(folder_path, f'{symbol}_{stock_name}_分红派息.csv'), index=False)
-            print(f"{symbol}_{stock_name}_分红派息已保存到：{folder_path}文件夹中")
+            bonus_data.to_csv(os.path.join(folder, f'{symbol}_{stock_name}_分红派息.csv'), index=False)
+            print(f"{symbol}_{stock_name}_分红派息已保存到：{folder}文件夹中")
 
             holders = fetch_holders(url_holders, cookies, params2)
             holders.rename(columns=holders_map, inplace=True)
             holders_data = holders.reindex(columns=holders_map.values())
-            holders_data.to_csv(os.path.join(folder_path, f'{symbol}_{stock_name}_股东户数.csv'), index=False)
-            print(f"{symbol}_{stock_name}_股东户数已保存到：{folder_path}文件夹中")
+            holders_data.to_csv(os.path.join(folder, f'{symbol}_{stock_name}_股东户数.csv'), index=False)
+            print(f"{symbol}_{stock_name}_股东户数已保存到：{folder}文件夹中")
 
         except Exception as e:
             print(f'获取{symbol}数据失败：{e}')

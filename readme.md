@@ -117,7 +117,7 @@ result = result[sorted(result.columns)]
 ### 第一步：获取数据
 ```bash
 # 获取单只股票数据
-python stock_report.py
+python xq_financial_excel.py
 # 输入：SH600000
 
 # 获取行业数据
